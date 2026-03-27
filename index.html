@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
   --bg: #F7F5F0;
@@ -549,7 +550,7 @@ footer .inner {
   <div class="page-wrap">
     <p class="header-tag">BWYF 전략기획부 · 데이터 분석 보고서 · 2025.12 기준</p>
     <h1>전국 청소년수련시설 현황으로 보는<br><em>BWYF의 전략적 위치</em></h1>
-    <p class="header-desc">성평등가족부 공개 데이터(2025년 말 기준 872개 시설)를 분석하여 부천여성청소년재단의 운영 모델 희소성, 시설 노후화 현황, 경기도 내 접근성 구조를 다각도로 검토합니다.</p>
+    <p class="header-desc">성평등가족부 공개 데이터(2025년 말 기준 872개 시설)를 분석하여 부천여성청소년재단(BWYF)의 시설 운영 구조, 노후화 현황, 경기도 내 접근성 패턴을 다각도로 검토합니다.</p>
     <div class="header-meta">
       <div class="header-meta-item">
         <span class="num">872</span>
@@ -575,15 +576,15 @@ footer .inner {
 <nav>
   <div class="page-wrap">
     <div class="nav-inner">
-      <button class="nav-btn active" onclick="scrollTo('s0')">개요</button>
-      <button class="nav-btn" onclick="scrollTo('s1')">부천 시설 현황</button>
-      <button class="nav-btn" onclick="scrollTo('s2')">경기도 재단 비교</button>
-      <button class="nav-btn" onclick="scrollTo('s3')">① 노후화 분석</button>
-      <button class="nav-btn" onclick="scrollTo('s4')">② 교차 분석</button>
-      <button class="nav-btn" onclick="scrollTo('s5')">③ 접근성 지도</button>
-      <button class="nav-btn" onclick="scrollTo('s6')">경영평가 연계</button>
-      <button class="nav-btn" onclick="scrollTo('s7')">종합 전략</button>
-      <button class="nav-btn" onclick="scrollTo('s8')">📂 원본 데이터</button>
+      <button class="nav-btn active" onclick="navScrollTo('s0')">개요</button>
+      <button class="nav-btn" onclick="navScrollTo('s1')">부천 시설 현황</button>
+      <button class="nav-btn" onclick="navScrollTo('s2')">경기도 재단 비교</button>
+      <button class="nav-btn" onclick="navScrollTo('s3')">① 노후화 분석</button>
+      <button class="nav-btn" onclick="navScrollTo('s4')">② 교차 분석</button>
+      <button class="nav-btn" onclick="navScrollTo('s5')">③ 접근성 지도</button>
+      <button class="nav-btn" onclick="navScrollTo('s6')">경영평가 연계</button>
+      <button class="nav-btn" onclick="navScrollTo('s7')">종합 전략</button>
+      <button class="nav-btn" onclick="navScrollTo('s8')">📂 원본 데이터</button>
     </div>
   </div>
 </nav>
@@ -725,13 +726,13 @@ footer .inner {
             <td>2007</td>
           </tr>
           <tr>
-            <td>송내청소년센터</td>
+            <td>송내청소년센터 <sup title="최초등록연월일 2007년 기준. 단, 현위치(송내어울마당)로 이전한 2015년 기준으로 보정 시 시설연령 10년">①</sup></td>
             <td><span class="badge green">문화의집</span></td>
             <td><span class="badge gray">위탁</span></td>
             <td>부천기독교청년회</td>
             <td>200명</td>
             <td>—</td>
-            <td>2007</td>
+            <td>2007 <sup>①</sup></td>
           </tr>
         </tbody>
       </table>
@@ -817,7 +818,7 @@ footer .inner {
     </div>
 
     <div class="insight info" style="margin-top:8px">
-      <strong>인구 대비 시설 접근성:</strong> 부천시(인구 약 82만)의 시설당 담당 인구는 13.7만 명으로, 안양(6.1만)·시흥(5.2만) 대비 2배 이상입니다. 1개 시설이 더 많은 인구를 커버해야 하는 구조 — 경영평가에서는 "효율 강조", 신규 시설 필요성 제언에서는 "공백 근거"로 활용합니다.
+      <strong>인구 대비 시설 접근성:</strong> 부천시(인구 약 82만)의 시설당 담당 인구는 12.5만 명으로, 안양(6.1만)·시흥(5.2만) 대비 2배 이상입니다. 1개 시설이 더 많은 인구를 커버해야 하는 구조 — 경영평가에서는 "효율 강조", 신규 시설 필요성 제언에서는 "공백 근거"로 활용합니다.
     </div>
   </div>
 </div>
@@ -1006,11 +1007,11 @@ footer .inner {
       <span class="tl-note">→ 2027년 20년</span>
     </div>
     <div class="tl-row">
-      <span class="tl-label">송내청소년센터</span>
+      <span class="tl-label">송내청소년센터 <sup style="font-size:9px;color:var(--ink3)">①보정</sup></span>
       <div class="tl-track">
-        <div class="tl-fill" style="width:88%;background:#FEF3E2;color:#5A3A00">18년 · 문화의집 · 위탁</div>
+        <div class="tl-fill" style="width:40%;background:#DAEAF8;color:#0A3A6A">10년 · 문화의집 · 위탁 (2015 이전 기준)</div>
       </div>
-      <span class="tl-note">→ 2027년 20년</span>
+      <span class="tl-note">→ 2035년 20년</span>
     </div>
     <div class="tl-row">
       <span class="tl-label">산울림청소년센터</span>
@@ -1034,7 +1035,12 @@ footer .inner {
     </div>
 
     <div class="insight warn">
-      <strong>⚠ 동시 노후화 리스크:</strong> 2006~2007년에 개소한 4개 시설이 2026~2027년 일제히 20년 구간에 진입합니다. 리모델링·기능 개선이 동시에 필요해지는 시점으로, 지금부터 시설 투자 계획을 중기 예산에 반영해야 합니다. 전국적으로 2000~2004년 개소 시설(172개)이 동일 시점에 노후화 구간에 진입하는 광역 현상이기도 합니다.
+      <strong>⚠ 동시 노후화 리스크:</strong> 2006~2007년에 개소한 BWYF 운영 4개 시설(산울림·부천여성청소년센터·부천시청소년센터·고리울)이 2026~2027년 일제히 20년 구간에 진입합니다. 리모델링·기능 개선이 동시에 필요해지는 시점으로, 지금부터 시설 투자 계획을 중기 예산에 반영해야 합니다. 전국적으로 2000~2004년 개소 시설(172개)이 동일 시점에 노후화 구간에 진입하는 광역 현상이기도 합니다.
+    </div>
+
+    <div style="margin-top:14px;padding:12px 14px;background:var(--surface2);border-radius:8px;font-size:11.5px;color:var(--ink3);line-height:1.7">
+      <strong>① 데이터 주석 — 송내청소년센터 노후화 보정</strong><br>
+      공개 데이터상 최초등록연월일은 <strong>2007-12-27</strong>이나, 이는 '송내동청소년문화의집' 최초 인가 기준입니다. 현재 위치인 소사구 경인로 92번길 33 <strong>송내어울마당</strong> 건물은 2015년 12월 완공·이전 개관한 것으로 확인되어, 실제 건물 연령은 약 <strong>10년</strong>입니다. 본 분석에서는 보수적 접근(등록일 기준 원데이터 유지)과 보정 분석(2015년 이전 기준 시설연령 10년 적용)을 병행 표시하였습니다. 유사 이전·리모델링 이력이 있는 시설에도 동일한 데이터 한계가 존재할 수 있으므로 해석 시 유의가 필요합니다.
     </div>
   </div>
 </div>
@@ -1046,7 +1052,7 @@ footer .inner {
       <span class="section-num">04</span>
       <div class="section-title-wrap">
         <h2>분석 ② 설치주체 × 운영방식 교차 분석</h2>
-        <p>BWYF 대행 모델의 전국적 희소성을 수치로 입증합니다.</p>
+        <p>전국 대행 운영 현황과 유사 청소년재단 피어 그룹을 비교하여 BWYF의 포지션을 확인합니다.</p>
       </div>
     </div>
 
@@ -1059,10 +1065,10 @@ footer .inner {
       <div class="op-card">
         <div class="type" style="color:var(--blue)">대행 운영단체 유형</div>
         <div class="count" style="color:var(--blue)">3가지</div>
-        <div class="desc">시설관리공단 36개(69%)<br>청소년 전문 재단 12개(23%)<br>도시·관광공사 4개(8%)</div>
+        <div class="desc">시설관리공단 36개(69%)<br>청소년재단 12개(23%)<br>도시·관광공사 4개(8%)</div>
       </div>
       <div class="op-card" style="border-color:var(--accent);background:#FDF8F5">
-        <div class="type" style="color:var(--accent)">청소년 전문 재단 대행</div>
+        <div class="type" style="color:var(--accent)">청소년재단 대행</div>
         <div class="count" style="color:var(--accent)">4개 지역</div>
         <div class="desc">부천·천안·예산·청양<br>52개 중 12개(23%)</div>
       </div>
@@ -1076,7 +1082,7 @@ footer .inner {
         </div>
         <div class="legend" style="margin-top:12px">
           <span class="legend-item"><span class="legend-dot" style="background:#1A5FAD"></span>시설관리공단 36개(69%)</span>
-          <span class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>청소년 전문 재단 12개(23%)</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>청소년재단 12개(23%)</span>
           <span class="legend-item"><span class="legend-dot" style="background:#5DCAA5"></span>도시·관광공사 4개(8%)</span>
         </div>
       </div>
@@ -1093,7 +1099,7 @@ footer .inner {
       </div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-size:16px;margin-bottom:14px">청소년 전문 재단 대행 기관 비교 — BWYF의 포지션</h3>
+    <h3 style="font-family:var(--serif);font-size:16px;margin-bottom:14px">청소년재단 대행 기관 비교 — BWYF의 포지션</h3>
     <div class="tbl-wrap" style="margin-bottom:16px">
       <table>
         <thead>
@@ -1111,7 +1117,7 @@ footer .inner {
             <td>경기 부천</td>
             <td><span class="badge amber">4개</span></td>
             <td>수련관 3 + 문화의집 1</td>
-            <td><strong>경기도 유일 청소년 전문 재단 대행</strong></td>
+            <td><strong>경기도 유일 청소년재단 대행</strong></td>
           </tr>
           <tr>
             <td>천안시청소년재단</td>
@@ -1217,16 +1223,19 @@ footer .inner {
     <div class="section-header">
       <span class="section-num">06</span>
       <div class="section-title-wrap">
-        <h2>경영평가 고유지표 연계 분석</h2>
-        <p>이번 데이터에서 각 고유지표에 활용할 수 있는 포인트와 추가 필요 데이터를 정리합니다.</p>
+        <h2>경영평가 지표 연계 분석</h2>
+        <p>이번 데이터에서 각 지표에 활용할 수 있는 포인트와 추가 필요 데이터를 정리합니다. 아래 지표는 통상적 분석 기준이며 BWYF 실제 평가편람과 다를 수 있습니다.</p>
       </div>
     </div>
 
+    <div style="margin-bottom:18px;padding:13px 16px;background:#EFF3FB;border:1px solid #BFD1EE;border-radius:8px;font-size:12.5px;color:#2A4070;line-height:1.7">
+      <strong>📋 분석 안내:</strong> 아래 지표 항목은 공공기관 경영평가에서 일반적으로 활용되는 <strong>통상적 지표 유형</strong>을 참고하여 구성하였습니다. BWYF의 실제 경영평가 고유지표·공통지표와 다를 수 있으며, 지표별 세부 내용은 해당 연도 평가편람 기준으로 검토·적용하시기 바랍니다.
+    </div>
     <div class="tbl-wrap" style="margin-bottom:20px">
       <table>
         <thead>
           <tr>
-            <th>고유지표</th>
+            <th>지표 유형</th>
             <th>이번 데이터 활용 포인트</th>
             <th>필요 추가 데이터</th>
             <th>활용도</th>
@@ -1243,7 +1252,7 @@ footer .inner {
           </tr>
           <tr>
             <td><strong>서비스 접근성</strong></td>
-            <td>시설당 담당 인구 13.7만 명<br>유사도시 대비 비교 기준 확보</td>
+            <td>시설당 담당 인구 12.5만 명<br>유사도시 대비 비교 기준 확보</td>
             <td>청소년 인구 세분화</td>
             <td><span class="badge green">직접 활용</span></td>
             <td><span class="matrix-mid">양면 해석</span></td>
@@ -1264,7 +1273,7 @@ footer .inner {
           </tr>
           <tr>
             <td><strong>공공성·책임성</strong></td>
-            <td>청소년 전문 재단 운영 전국 12개<br>실적 기반 지표 구성이 핵심</td>
+            <td>청소년재단 운영 전국 12개<br>실적 기반 지표 구성이 핵심</td>
             <td>취약계층 이용 비율<br>무료 프로그램 비중</td>
             <td><span class="badge green">구조 근거</span></td>
             <td><span class="matrix-good">강점</span></td>
@@ -1280,7 +1289,7 @@ footer .inner {
         <strong>① 시설 가동률:</strong> 부천의 평균 연면적(2,753㎡)이 유사 도시 대비 낮은 상황에서 이용자 수가 비슷하거나 높다면, ㎡당 이용자 밀도 지표에서 오히려 우위를 점할 수 있습니다. "공간 제약 속 높은 효율"이라는 서사를 만들 수 있어요.
       </div>
       <div class="insight info">
-        <strong>② 서비스 접근성:</strong> 부천시는 면적이 53㎢로 경기도에서 가장 좁은 고밀도 도시입니다. 단위면적당 시설 접근성으로 환산하면 수치가 개선됩니다. 이 프레임을 지표 설계에 반영하면 BWYF에 유리한 구조가 만들어집니다.
+        <strong>② 서비스 접근성:</strong> 부천시는 인구 약 75만에 면적 53㎢로 경기도에서 가장 좁은 고밀도 도시입니다. 단위면적당 시설 접근성으로 환산하면 수치가 개선됩니다. 이 프레임을 지표 설계에 반영하면 BWYF에 유리한 구조가 만들어집니다.
       </div>
       <div class="insight info">
         <strong>③ 사업 다양성:</strong> BWYF가 기존 수련관·문화의집 안에서 특화시설 기능을 내재화해 운영하고 있다면, "시설 유형의 한계를 사업 다양성으로 초과 달성"이라는 논리가 성립합니다. 나와봄 사업, 학교 밖 청소년 지원 등을 이 맥락에 배치하세요.
@@ -1313,9 +1322,9 @@ footer .inner {
     <div class="strategy-box">
       <div class="tag">Core Strategic Position</div>
       <blockquote>
-        "경기도 유일의 청소년 전문 재단 대행 기관으로, 서부권 수련관 허브 역할을 담당하고 있으나, 2006~2007년 개소한 4개 시설의 동시 노후화 구간 진입과 숙박형 시설 공백이 중기 핵심 과제다."
+        "경기도 유일의 청소년재단 대행 기관으로, 서부권 수련관 허브 역할을 담당하고 있으나, 2006~2007년 개소한 4개 시설의 동시 노후화 구간 진입과 숙박형 시설 공백이 중기 핵심 과제다."
       </blockquote>
-      <div class="detail">경영평가 보고서, 정책포럼 기조발표, 중기 사업계획 어디에 넣어도 데이터로 뒷받침되는 포지셔닝 문장입니다.</div>
+      <div class="detail">경기도 내 청소년재단 비교, 노후화 분석, 접근성 데이터로 뒷받침되는 포지셔닝 문장입니다. 경영평가 보고서, 정책포럼 기조발표, 중기 사업계획 등에 활용할 수 있습니다.</div>
     </div>
 
     <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -1323,7 +1332,7 @@ footer .inner {
         <h3 style="font-family:var(--serif);font-size:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">🏛️ 강점 — 지금 당장 활용</h3>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px;font-size:13px">
-            <strong>청소년 전문 재단 운영 희소성</strong><br>
+            <strong>청소년재단 운영 희소성</strong><br>
             <span style="color:var(--ink2)">전국 12개, 경기도 유일. 운영 방식의 차이이며, 전문성 축적 측면에서 벤치마킹 가치 있음.</span>
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px;font-size:13px">
@@ -1371,7 +1380,7 @@ footer .inner {
             </tr>
             <tr>
               <td><span class="badge red">🥇 즉시</span></td>
-              <td>설치주체 × 운영방식 교차 → BWYF 희소성 수치화</td>
+              <td>설치주체 × 운영방식 교차 → 피어 그룹 비교</td>
               <td>경영평가 보고서</td>
               <td>완료</td>
             </tr>
@@ -1526,12 +1535,16 @@ footer .inner {
 <!-- ══════════════════════════════════════ SCRIPTS -->
 <script>
 // ─── Nav scroll
-function scrollTo(id) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+function navScrollTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navH = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 56;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+  window.scrollTo({ top: top, behavior: 'smooth' });
 }
 
 // ─── Active nav on scroll
-const sections = ['s0','s1','s2','s3','s4','s5','s6','s7'];
+const sections = ['s0','s1','s2','s3','s4','s5','s6','s7','s8'];
 const btns = document.querySelectorAll('.nav-btn');
 window.addEventListener('scroll', () => {
   let cur = 's0';
@@ -1549,6 +1562,8 @@ Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
 Chart.defaults.font.size = 12;
 Chart.defaults.color = '#5A5650';
 Chart.defaults.plugins.legend.display = false;
+// datalabels 플러그인 전역 등록
+Chart.register(ChartDataLabels);
 
 const COLORS = {
   blue: '#1A5FAD',
@@ -1574,7 +1589,18 @@ new Chart(document.getElementById('c-types'), {
     }]
   },
   options: { responsive: true, maintainAspectRatio: false, cutout: '60%',
-    plugins: { tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } } }
+    plugins: {
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff',
+        font: { size: 11, weight: 'bold' },
+        formatter: (val, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          const pct = Math.round(val/total*100);
+          return pct >= 5 ? pct + '%' : '';
+        }
+      }
+    }
   }
 });
 
@@ -1590,7 +1616,18 @@ new Chart(document.getElementById('c-ops'), {
     }]
   },
   options: { responsive: true, maintainAspectRatio: false, cutout: '60%',
-    plugins: { tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } } }
+    plugins: {
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff',
+        font: { size: 11, weight: 'bold' },
+        formatter: (val, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          const pct = Math.round(val/total*100);
+          return pct >= 5 ? pct + '%' : '';
+        }
+      }
+    }
   }
 });
 
@@ -1608,7 +1645,16 @@ new Chart(document.getElementById('c-bucheon-cap'), {
   options: { responsive: true, maintainAspectRatio: false, cutout: '55%',
     plugins: {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
-      tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '명' } }
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '명' } },
+      datalabels: {
+        color: '#fff',
+        font: { size: 11, weight: 'bold' },
+        formatter: (val, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          const pct = Math.round(val/total*100);
+          return pct >= 8 ? val + '명' : '';
+        }
+      }
     }
   }
 });
@@ -1628,7 +1674,14 @@ new Chart(document.getElementById('c-yearly'), {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    plugins: { tooltip: { callbacks: { title: ctx => ctx[0].label + '년', label: ctx => ' 신규 개소: ' + ctx.raw + '개' } } },
+    plugins: {
+      tooltip: { callbacks: { title: ctx => ctx[0].label + '년', label: ctx => ' 신규 개소: ' + ctx.raw + '개' } },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        font: { size: 9 }, color: '#5A5650',
+        formatter: v => v >= 30 ? v : ''
+      }
+    },
     scales: {
       x: { ticks: { font: { size: 10 }, callback: (v,i) => yrs[i]%5===0 ? yrs[i] : '', maxRotation: 0 }, grid: { display: false } },
       y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } }
@@ -1650,7 +1703,14 @@ new Chart(document.getElementById('c-age-dist'), {
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    plugins: { tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '개' } } },
+    plugins: {
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '개' } },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        font: { size: 11, weight: '500' }, color: '#1A1814',
+        formatter: v => v + '개'
+      }
+    },
     scales: {
       x: { grid: { display: false } },
       y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } }
@@ -1672,9 +1732,16 @@ new Chart(document.getElementById('c-city-age'), {
   options: {
     indexAxis: 'y',
     responsive: true, maintainAspectRatio: false,
-    plugins: { tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '년' } } },
+    plugins: {
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '년' } },
+      datalabels: {
+        anchor: 'end', align: 'right',
+        font: { size: 11, weight: '500' }, color: '#1A1814',
+        formatter: v => v + '년'
+      }
+    },
     scales: {
-      x: { beginAtZero: true, max: 20, grid: { color: 'rgba(0,0,0,0.04)' } },
+      x: { beginAtZero: true, max: 22, grid: { color: 'rgba(0,0,0,0.04)' } },
       y: { grid: { display: false } }
     }
   }
@@ -1684,7 +1751,7 @@ new Chart(document.getElementById('c-city-age'), {
 new Chart(document.getElementById('c-daehang-type'), {
   type: 'doughnut',
   data: {
-    labels: ['시설관리공단','청소년 전문 재단','도시·관광공사'],
+    labels: ['시설관리공단','청소년재단','도시·관광공사'],
     datasets: [{
       data: [36, 12, 4],
       backgroundColor: [COLORS.blue, COLORS.amber, COLORS.teal],
@@ -1692,7 +1759,19 @@ new Chart(document.getElementById('c-daehang-type'), {
     }]
   },
   options: { responsive: true, maintainAspectRatio: false, cutout: '55%',
-    plugins: { tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } } }
+    plugins: {
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff',
+        font: { size: 12, weight: 'bold' },
+        formatter: (val, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          const pct = Math.round(val/total*100);
+          return pct >= 5 ? val + '개
+(' + pct + '%)' : '';
+        }
+      }
+    }
   }
 });
 
@@ -1711,7 +1790,12 @@ new Chart(document.getElementById('c-sillip'), {
     indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 12 } },
-      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } }
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff', font: { size: 11, weight: 'bold' },
+        formatter: (v, ctx) => v >= 20 ? ctx.dataset.label + '
+' + v + '개' : v >= 5 ? v + '개' : ''
+      }
     },
     scales: {
       x: { stacked: true, grid: { color: 'rgba(0,0,0,0.04)' } },
@@ -1737,7 +1821,11 @@ new Chart(document.getElementById('c-region'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
-      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } }
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff', font: { size: 10, weight: 'bold' },
+        formatter: v => v >= 4 ? v : ''
+      }
     },
     scales: {
       x: { stacked: true, ticks: { font: { size: 10 } }, grid: { display: false } },
@@ -1763,7 +1851,11 @@ new Chart(document.getElementById('c-adjacent'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
-      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } }
+      tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
+      datalabels: {
+        color: '#fff', font: { size: 10, weight: 'bold' },
+        formatter: v => v >= 2 ? v : ''
+      }
     },
     scales: {
       x: { stacked: true, grid: { display: false } },
@@ -1870,7 +1962,9 @@ function changePage(dir) {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   currentPage = Math.max(1, Math.min(totalPages, currentPage + dir));
   renderTable();
-  document.getElementById('s8').scrollIntoView({behavior:'smooth', block:'start'});
+  // 테이블 스크롤 맨 위로 리셋
+  const tblWrap = document.querySelector('#s8 .tbl-wrap');
+  if (tblWrap) tblWrap.scrollTop = 0;
 }
 
 const SORT_KEYS = ['연번','시도','시군구','시설명','시설종류','운영방법','운영단체','수용정원계','연면적','최초등록연월일'];
@@ -1975,10 +2069,18 @@ new Chart(document.getElementById('c-found-age'), {
   },
   options: {
     responsive:true, maintainAspectRatio:false,
-    plugins: { legend:{display:false}, tooltip:{ callbacks:{ label:ctx=>' '+ctx.raw+'년' } } },
+    plugins: {
+      legend:{display:false},
+      tooltip:{ callbacks:{ label:ctx=>' '+ctx.raw+'년' } },
+      datalabels: {
+        anchor:'end', align:'end',
+        font:{size:10, weight:'bold'}, color:'#1A1814',
+        formatter: v => v > 0 ? v+'년' : ''
+      }
+    },
     scales: {
       x: { ticks:{font:{size:11}}, grid:{display:false} },
-      y: { beginAtZero:true, max:24, ticks:{callback:v=>v+'년'}, grid:{color:'rgba(0,0,0,0.04)'} }
+      y: { beginAtZero:true, max:26, ticks:{callback:v=>v+'년'}, grid:{color:'rgba(0,0,0,0.04)'} }
     }
   }
 });
