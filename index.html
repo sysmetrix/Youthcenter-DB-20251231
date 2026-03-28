@@ -1562,8 +1562,9 @@ Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
 Chart.defaults.font.size = 12;
 Chart.defaults.color = '#5A5650';
 Chart.defaults.plugins.legend.display = false;
-// datalabels 플러그인 전역 등록
+// datalabels 플러그인 전역 등록 (기본 off, 각 차트에서 명시적으로 활성화)
 Chart.register(ChartDataLabels);
+Chart.defaults.plugins.datalabels.display = false;
 
 const COLORS = {
   blue: '#1A5FAD',
@@ -1592,6 +1593,7 @@ new Chart(document.getElementById('c-types'), {
     plugins: {
       tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff',
         font: { size: 11, weight: 'bold' },
         formatter: (val, ctx) => {
@@ -1619,6 +1621,7 @@ new Chart(document.getElementById('c-ops'), {
     plugins: {
       tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff',
         font: { size: 11, weight: 'bold' },
         formatter: (val, ctx) => {
@@ -1647,6 +1650,7 @@ new Chart(document.getElementById('c-bucheon-cap'), {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
       tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '명' } },
       datalabels: {
+        display: true,
         color: '#fff',
         font: { size: 11, weight: 'bold' },
         formatter: (val, ctx) => {
@@ -1677,6 +1681,7 @@ new Chart(document.getElementById('c-yearly'), {
     plugins: {
       tooltip: { callbacks: { title: ctx => ctx[0].label + '년', label: ctx => ' 신규 개소: ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         anchor: 'end', align: 'end',
         font: { size: 9 }, color: '#5A5650',
         formatter: v => v >= 30 ? v : ''
@@ -1706,6 +1711,7 @@ new Chart(document.getElementById('c-age-dist'), {
     plugins: {
       tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         anchor: 'end', align: 'end',
         font: { size: 11, weight: '500' }, color: '#1A1814',
         formatter: v => v + '개'
@@ -1735,6 +1741,7 @@ new Chart(document.getElementById('c-city-age'), {
     plugins: {
       tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '년' } },
       datalabels: {
+        display: true,
         anchor: 'end', align: 'right',
         font: { size: 11, weight: '500' }, color: '#1A1814',
         formatter: v => v + '년'
@@ -1762,13 +1769,13 @@ new Chart(document.getElementById('c-daehang-type'), {
     plugins: {
       tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff',
         font: { size: 12, weight: 'bold' },
         formatter: (val, ctx) => {
           const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
           const pct = Math.round(val/total*100);
-          return pct >= 5 ? val + '개
-(' + pct + '%)' : '';
+          return pct >= 5 ? val + '개(' + pct + '%)' : '';
         }
       }
     }
@@ -1792,9 +1799,9 @@ new Chart(document.getElementById('c-sillip'), {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 12 } },
       tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff', font: { size: 11, weight: 'bold' },
-        formatter: (v, ctx) => v >= 20 ? ctx.dataset.label + '
-' + v + '개' : v >= 5 ? v + '개' : ''
+        formatter: (v, ctx) => v >= 10 ? v + '개' : ''
       }
     },
     scales: {
@@ -1823,6 +1830,7 @@ new Chart(document.getElementById('c-region'), {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
       tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff', font: { size: 10, weight: 'bold' },
         formatter: v => v >= 4 ? v : ''
       }
@@ -1853,6 +1861,7 @@ new Chart(document.getElementById('c-adjacent'), {
       legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 10 } },
       tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '개' } },
       datalabels: {
+        display: true,
         color: '#fff', font: { size: 10, weight: 'bold' },
         formatter: v => v >= 2 ? v : ''
       }
@@ -2073,6 +2082,7 @@ new Chart(document.getElementById('c-found-age'), {
       legend:{display:false},
       tooltip:{ callbacks:{ label:ctx=>' '+ctx.raw+'년' } },
       datalabels: {
+        display: true,
         anchor:'end', align:'end',
         font:{size:10, weight:'bold'}, color:'#1A1814',
         formatter: v => v > 0 ? v+'년' : ''
